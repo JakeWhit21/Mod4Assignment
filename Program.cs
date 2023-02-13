@@ -4,7 +4,7 @@ string path = Directory.GetCurrentDirectory() + "\\nlog.config";
 var logger = LogManager.LoadConfiguration(path).GetCurrentClassLogger();
 // See https://aka.ms/new-console-template for more information
 
-string file = "movies.csv";
+string file = "movies.txt";
 
 bool duplicate = false;
 
@@ -32,12 +32,24 @@ if (resp == "1") {
                 logger.Error("This is a duplicate id");
                 duplicate = true;
             }
+            
 
         }
+        sr.Close();
 
+            StreamWriter sw = new StreamWriter(file, append: true);
         if (!duplicate) {
-            Console.WriteLine("this works");
+            Console.WriteLine("Enter movie title: ");
+            string movieTitleInput = Console.ReadLine();
+            Console.WriteLine("Enter movie genre: ");
+            string movieGenreInput = Console.ReadLine();
+
+            //Add movie input to text file
+            
+            sw.WriteLine("{0},{1},{2}", movieIdInput, movieTitleInput, movieGenreInput);
         }
+        sw.Close();
+        
 
     
 
